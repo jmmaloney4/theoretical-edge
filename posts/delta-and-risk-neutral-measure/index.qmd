@@ -6,6 +6,7 @@ execute:
   warning: false
 ---
 
+## The Delta
 I assume most readers are familiar with expression for the delta of a call option within the Black-Scholes model:
 
 $$

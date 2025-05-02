@@ -16,6 +16,8 @@ metadata-files:
 
 format:
   html:
+    toc: true
+    toc-location: right
     math: mathjax
     number-sections: true
     # math: katex

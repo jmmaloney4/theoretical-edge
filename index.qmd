@@ -11,6 +11,3 @@ page-layout: full
 title-block-banner: false # Optional: turn off banner for the listing page itself
 ---
 
-Welcome to Theoretical Edge, a blog exploring the mathematical foundations of options pricing, trading strategies, and quantitative finance. Find the latest posts below.
-
-

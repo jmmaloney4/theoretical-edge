@@ -81,6 +81,11 @@
             exec = config.treefmt.build.wrapper;
             category = "Dev Tools";
           };
+          preview = {
+            description = "Preview the quarto project";
+            exec = "quarto preview";
+            category = "Dev Tools";
+          };
         };
 
         pre-commit = {

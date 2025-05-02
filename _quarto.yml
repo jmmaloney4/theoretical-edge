@@ -6,16 +6,18 @@ website:
   navbar:
     right:
       - about.qmd
-      - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+    # left:
+    #   - text: "Posts"
+    #     href: posts/index.qmd
+  page-navigation: true
+
+metadata-files:
+  - _metadata.yml
+
 format:
   html:
     math: katex
-    theme:
-      # - bootstrap
-      - custom.scss
-    # mainfont: 'Open Sans'
-    # monofont: 'Fira Code'
+    theme: simplex
+    mainfont: 'Open Sans'
+    monofont: 'Fira Code'
 

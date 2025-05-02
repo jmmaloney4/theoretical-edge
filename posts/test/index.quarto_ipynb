@@ -1,0 +1,124 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Using Python, Plots, and LaTeX in Quarto\"\n",
+        "format: html\n",
+        "execute:\n",
+        "  echo: true\n",
+        "  warning: false\n",
+        "---\n",
+        "\n",
+        "\n",
+        "## 📌 Introduction\n",
+        "\n",
+        "In this post, we demonstrate how to use **Python code**, **visualizations**, and **LaTeX math** in a single Quarto blog post.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## 🧮 Defining a Function with Python\n",
+        "\n",
+        "Let's define a simple quadratic function using Python:\n"
+      ],
+      "id": "d40d121d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "def f(x):\n",
+        "    return x**2 - 3*x + 2"
+      ],
+      "id": "6fee3718",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "\n",
+        "## 📊 Plotting the Function\n",
+        "\n",
+        "We'll plot the function over the interval \\([0, 5]\\).\n"
+      ],
+      "id": "0542be88"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "\n",
+        "x = np.linspace(0, 5, 100)\n",
+        "y = f(x)\n",
+        "\n",
+        "plt.plot(x, y, label=\"f(x) = x² - 3x + 2\")\n",
+        "plt.axhline(0, color='gray', lw=0.5)\n",
+        "plt.title(\"Plot of f(x)\")\n",
+        "plt.xlabel(\"x\")\n",
+        "plt.ylabel(\"f(x)\")\n",
+        "plt.legend()\n",
+        "plt.grid(True)\n",
+        "plt.show()"
+      ],
+      "id": "c6e60e0b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "\n",
+        "## ✏️ Adding LaTeX Math\n",
+        "\n",
+        "We can write LaTeX equations inline like this: $f(x) = x^2 - 3x + 2$, or as display equations:\n",
+        "\n",
+        "$$\n",
+        "f(x) = x^2 - 3x + 2\n",
+        "$$\n",
+        "\n",
+        "To find the roots, solve:\n",
+        "\n",
+        "$$\n",
+        "x^2 - 3x + 2 = 0\n",
+        "$$\n",
+        "\n",
+        "Which factors to:\n",
+        "\n",
+        "$$\n",
+        "(x - 1)(x - 2) = 0 \\Rightarrow x = 1, 2\n",
+        "$$\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## ✅ Summary\n",
+        "\n",
+        "This blog post used:\n",
+        "- Python code to define and compute,\n",
+        "- Matplotlib to create plots, and\n",
+        "- LaTeX to format math equations.\n",
+        "\n",
+        "All rendered together beautifully in a Quarto document!"
+      ],
+      "id": "f6928af6"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/nix/store/rciialz8y8dv1mnz12zmcfkdn641x9pr-python3-3.12.9-env/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

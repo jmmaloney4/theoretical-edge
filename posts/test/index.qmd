@@ -1,0 +1,78 @@
+---
+title: "Using Python, Plots, and LaTeX in Quarto"
+format: html
+execute:
+  echo: true
+  warning: false
+---
+
+## 📌 Introduction
+
+In this post, we demonstrate how to use **Python code**, **visualizations**, and **LaTeX math** in a single Quarto blog post.
+
+---
+
+## 🧮 Defining a Function with Python
+
+Let's define a simple quadratic function using Python:
+
+```{python}
+def f(x):
+    return x**2 - 3*x + 2
+```
+
+---
+
+## 📊 Plotting the Function
+
+We'll plot the function over the interval \([0, 5]\).
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 5, 100)
+y = f(x)
+
+plt.plot(x, y, label="f(x) = x² - 3x + 2")
+plt.axhline(0, color='gray', lw=0.5)
+plt.title("Plot of f(x)")
+plt.xlabel("x")
+plt.ylabel("f(x)")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+---
+
+## ✏️ Adding LaTeX Math
+
+We can write LaTeX equations inline like this: $f(x) = x^2 - 3x + 2$, or as display equations:
+
+$$
+f(x) = x^2 - 3x + 2
+$$
+
+To find the roots, solve:
+
+$$
+x^2 - 3x + 2 = 0
+$$
+
+Which factors to:
+
+$$
+(x - 1)(x - 2) = 0 \Rightarrow x = 1, 2
+$$
+
+---
+
+## ✅ Summary
+
+This blog post used:
+- Python code to define and compute,
+- Matplotlib to create plots, and
+- LaTeX to format math equations.
+
+All rendered together beautifully in a Quarto document!

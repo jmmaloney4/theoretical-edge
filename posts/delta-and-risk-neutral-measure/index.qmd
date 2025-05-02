@@ -1,0 +1,70 @@
+---
+title: "Black-Scholes Delta and the Risk-Neutral Measure"
+format: html
+execute:
+  echo: true
+  warning: false
+---
+
+I assume most readers are familiar with expression for the delta of a call option within the Black-Scholes model:
+
+$$
+\Delta = \frac{\partial C(K,T)}{\partial S} = N(d_1)
+$$ {#eq-bs-delta}
+
+where $C(K,T)$ is the price of a call option with strike $K$ and maturity $T$, on an asset with price $S$, $N(x)$ is the cumulative distribution function of the standard normal distribution, and $d_1$ is given by
+
+$$
+d_1 = \frac{\ln(S/K) + (r + \sigma^2/2)T}{\sigma\sqrt{T}}.
+$$
+
+The derivation of this formula, starting from the Black-Scholes call option price, is accessible to any STEM undergraduate, with a few pieces of paper (go on, try it!).
+
+Beginning with the Black-Scholes call option price,
+
+$$
+C(K,T) = S_{0} N(d_{1}) - Ke^{-rT} N(d_{2}),
+$$
+
+differentiate once with respect to $S_{0}$ to get the delta:
+
+$$
+\begin{align}
+\Delta C(K,T) &= \frac{ \partial }{ \partial S_{0} }  C(K,T) \\
+&= \frac{ \partial  }{ \partial S_{0} } S_{0} N(d_{1}) 
+- \frac{ \partial  }{ \partial S_{0} } Ke^{-rT} N(d_{2}) \\
+&= N(d_{1}) 
++ S_{0}\frac{ \partial  }{ \partial S_{0} } N(d_{1}) 
+- Ke^{-rT} \frac{ \partial }{ \partial S_{0} } N(d_{2}).
+\end{align}
+$$
+
+I will leave it to you to show that
+$$
+\begin{align}
+\frac{ \partial  }{ \partial S_{0} } N(d_{1})
+= \frac{\phi(d_{1})}{S_{0} \sigma \sqrt{T}}
+&&
+\text{and}
+&&
+\frac{ \partial  }{ \partial S_{0} } N(d_{2})
+= \frac{\phi(d_{2})}{S_{0} \sigma \sqrt{T}} 
+\end{align}
+$$
+
+for $\phi(\cdot)$ the probability density function of the standard normal distribution.
+
+But, working backwards from @eq-bs-delta, we still need to show
+$$
+\frac{\phi(d_{1})}{\sigma \sqrt{T}} = Ke^{-rT} \frac{\phi(d_{2})}{S_{0} \sigma \sqrt{T}}.
+$$
+
+With enough elbow grease, you can do the algebra and make it work out, but this actually has a much more elegant statement as the fact that $\frac{Ke^{-rT}}{S_{0}}$ is Radon-Nikodym derivative of the risk-neutral measure with respect to the stock-numeraire measure.
+
+Let's break this down.
+
+## Risk-Neutral Measure
+
+
+
+

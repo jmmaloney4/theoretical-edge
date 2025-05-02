@@ -56,13 +56,26 @@
         lib,
         ...
       }: {
-        packages = with lib.attrsets; let
-          f = n: v: v.config.nixpkgs.system == system;
-          nixos = mapAttrs (n: v: v.config.system.build.toplevel) (filterAttrs f self.nixosConfigurations);
-          # darwin = mapAttrs (n: v: v.system) (filterAttrs f self.darwinConfigurations);
-          darwin = {};
-        in
-          nixos // darwin;
+        packages = {
+          # Define the Python environment for Quarto
+          pythonEnv = pkgs.python3.withPackages (ps:
+            with ps; [
+              matplotlib
+              numpy
+            ]);
+
+          # Create a wrapped Quarto executable
+          quarto = pkgs.writeShellApplication {
+            name = "quarto";
+            runtimeInputs = [pkgs.quarto self'.packages.pythonEnv];
+            text = ''
+              # Ensure pythonEnv's bin is prioritized in PATH
+              export PATH="${self'.packages.pythonEnv}/bin:$PATH"
+              # Execute the original quarto command
+              exec ${lib.getExe pkgs.quarto} "$@"
+            '';
+          };
+        };
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [
@@ -71,7 +84,9 @@
             config.treefmt.build.devShell
           ];
           buildInputs = with pkgs; [
-            quarto
+            # Use the wrapped quarto in the dev shell
+            self'.packages.quarto
+            self'.packages.pythonEnv
           ];
         };
 
@@ -83,7 +98,8 @@
           };
           preview = {
             description = "Preview the quarto project";
-            exec = "quarto preview";
+            # Use the wrapped quarto executable for the preview script
+            exec = "${lib.getExe self'.packages.quarto} preview";
             category = "Dev Tools";
           };
         };

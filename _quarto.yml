@@ -16,7 +16,11 @@ metadata-files:
 
 format:
   html:
-    math: katex
+    math: mathjax
+    number-sections: true
+    # math: katex
+    # html-math-method: mathjax
+    # crossref: true
     theme: simplex
     mainfont: 'Open Sans'
     monofont: 'Fira Code'

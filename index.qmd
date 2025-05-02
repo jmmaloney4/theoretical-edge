@@ -1,14 +1,16 @@
 ---
-title: "theoretical-edge"
+title: "Theoretical Edge"
 listing:
   contents: posts
   sort: "date desc"
-  type: default
+  type: default # Other options: grid, table
   categories: true
-  sort-ui: false
-  filter-ui: false
+  sort-ui: true
+  filter-ui: true
 page-layout: full
-title-block-banner: true
+title-block-banner: false # Optional: turn off banner for the listing page itself
 ---
+
+Welcome to Theoretical Edge, a blog exploring the mathematical foundations of options pricing, trading strategies, and quantitative finance. Find the latest posts below.
 
 

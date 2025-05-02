@@ -1,6 +1,6 @@
 ---
-title: "About"
-image: profile.jpg
+title: "Theoretical Edge"
+image: logo.png
 about:
   template: jolla
   links:
@@ -16,4 +16,3 @@ about:
 
 ---
 
-About this blog

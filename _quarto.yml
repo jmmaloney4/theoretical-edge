@@ -26,4 +26,5 @@ format:
     theme: simplex
     mainfont: 'Open Sans'
     monofont: 'Fira Code'
+    css: styles.css
 

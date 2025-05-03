@@ -66,6 +66,56 @@ Let's break this down.
 
 ## Risk-Neutral Measure
 
+Define two assets $S_t$ and $B_t$, with dynamics
+$$
+dS_t = \mu S_t \, dt + \sigma S_t \, dW_t 
+$$
+and
+$$
+dB_t = r B_t \, dt \quad \implies \quad B_t = e^{rt},
+$$
+where $W_t$ is a standard Brownian motion under the physical measure $\mathbb{P}$.
+
+Defien the discounted stock asset $\bar{S}_t$ as
+$$
+\bar{S}_t = \frac{S_t}{B_t} = e^{-rt} S_t.
+$$
+
+Recall Itô's lemma:
+
+::: {.theorem #thm-ito}
+**Itô's Lemma**
+
+Let $X_t$ be an Itô process given by
+$$
+dX_t = \mu(X_t, t) \, dt + \sigma(X_t, t) \, dW_t,
+$$
+
+then for any function $f(X_t, t)$ that is twice differentiable with respect to $X_t$ and once differentiable with respect to $t$, we have
+$$
+df(X_t, t) = \left( \frac{\partial f}{\partial t} + \mu \frac{\partial f}{\partial X_t} + \frac{1}{2} \sigma^2 \frac{\partial^2 f}{\partial X_t^2} \right) dt + \sigma \frac{\partial f}{\partial X_t} dW_t.
+$$
+:::
+
+Apply @thm-ito to $\bar{S}_t$ to get
+
+$$
+\begin{align}
+d\bar{S}_t 
+&= \left( \frac{\partial \bar{S}_t}{\partial t} + \mu S_t \frac{\partial \bar{S}_t}{\partial S_t} + \frac{1}{2} \left( \sigma S_t \right)^2 \frac{\partial^2 \bar{S}_t}{\partial S_t^2} \right) dt + \sigma S_t \frac{\partial \bar{S}_t}{\partial S_t} dW_t \\
+&= \left( \mu - r \right) \bar{S}_t \, dt + \sigma \bar{S}_t \, dW_t.
+\end{align}
+$$
+
+If we define a new Brownian motion $W_t^\mathbb{Q}$ as
+$$
+dW_t^\mathbb{Q} = dW_t + \frac{\mu - r}{\sigma} \, dt,
+$$
+then we can rewrite the dynamics of $\bar{S}_t$ as
+$$
+d\bar{S}_t = \left( \mu - r \right) \bar{S}_t \, dt + \sigma \bar{S}_t \, \left( dW_t^\mathbb{Q} - \frac{\mu - r}{\sigma} \, dt \right).
+$$
+
 
 
 

@@ -1,0 +1,7 @@
+.theorem {
+  background-color: #f0f0f0; /* Light gray background */
+  padding: 1em; /* Add padding inside the block */
+  margin-top: 1em; /* Add margin above the block */
+  margin-bottom: 1em; /* Add margin below the block */
+  border-left: 5px solid #cccccc; /* Add a left border for emphasis */
+} 

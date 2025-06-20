@@ -97,6 +97,7 @@
               def main():
                   # 1. Gather info
                   title = prompt("Post title:")
+                  subtitle = prompt("Post subtitle (optional):", "")
                   author = prompt("Author name:", os.getenv("USER", ""))
                   cats   = prompt("Categories (comma-separated):", "")
                   draft_flag = prompt("Draft? (y/N):", "N").lower()
@@ -116,15 +117,24 @@
                   fm_lines = [
                       "---",
                       f"title: \"{title}\"",
+                  ]
+                  
+                  if subtitle:
+                      fm_lines.append(f"subtitle: \"{subtitle}\"")
+                  
+                  fm_lines.extend([
                       f"author: \"{author}\"",
                       f"date: {today}",
                       "categories: [" + ", ".join(c.strip() for c in cats.split(",") if c.strip()) + "]",
                       f"draft: {draft}",
                       "format: html",
+                      "execute:",
+                      "  echo: true",
+                      "  warning: false",
                       "---",
                       "",
                       "<!-- start writing your post here -->"
-                  ]
+                  ])
                   with open(filepath, "w") as f:
                       f.write("\n".join(fm_lines))
                   

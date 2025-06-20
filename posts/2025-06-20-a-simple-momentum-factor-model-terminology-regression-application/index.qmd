@@ -1,0 +1,11 @@
+---
+title: "A simple momentum factor model"
+subtitle: "Terminology, regression, application."
+author: "Jack Maloney"
+date: 2025-06-20
+categories: [factor-models]
+draft: true
+format: html
+---
+
+<!-- start writing your post here -->

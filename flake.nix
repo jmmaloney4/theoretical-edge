@@ -8,7 +8,7 @@
 
     flake-root.url = "github:srid/flake-root";
 
-    mission-control.url = "github:Platonic-Systems/mission-control";
+    just-flake.url = "github:juspay/just-flake";
 
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
@@ -29,7 +29,7 @@
     nixpkgs,
     flake-parts,
     flake-root,
-    mission-control,
+    just-flake,
     pre-commit-hooks,
     systems,
     treefmt,
@@ -42,7 +42,7 @@
       systems = import systems;
       imports = [
         flake-root.flakeModule
-        mission-control.flakeModule
+        just-flake.flakeModule
         pre-commit-hooks.flakeModule
         treefmt.flakeModule
       ];
@@ -79,7 +79,7 @@
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [
-            config.mission-control.devShell
+            config.just-flake.outputs.devShell
             config.pre-commit.devShell
             config.treefmt.build.devShell
           ];
@@ -90,17 +90,15 @@
           ];
         };
 
-        mission-control.scripts = {
-          fmt = {
-            description = "Format the source tree";
-            exec = config.treefmt.build.wrapper;
-            category = "Dev Tools";
-          };
+        just-flake.features = {
+          treefmt.enable = true;
           preview = {
-            description = "Preview the quarto project";
-            # Use the wrapped quarto executable for the preview script
-            exec = "${lib.getExe self'.packages.quarto} preview";
-            category = "Dev Tools";
+            enable = true;
+            justfile = ''
+              # Preview the quarto project
+              preview:
+                ${lib.getExe self'.packages.quarto} preview
+            '';
           };
         };
 

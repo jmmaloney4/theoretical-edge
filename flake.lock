@@ -70,18 +70,18 @@
         "type": "github"
       }
     },
-    "mission-control": {
+    "just-flake": {
       "locked": {
-        "lastModified": 1733438716,
-        "narHash": "sha256-1tt43rwHk0N5fwEhbpsHWO4nBVFCQN0w1KM427DNycM=",
-        "owner": "Platonic-Systems",
-        "repo": "mission-control",
-        "rev": "65d04c4ab9db076eff09824d2936a5c215c21f36",
+        "lastModified": 1713316411,
+        "narHash": "sha256-NkJfU6H+6vgHkPtZ2ESbZ/h2wnsDQrZvB4vbdUIBx8Q=",
+        "owner": "juspay",
+        "repo": "just-flake",
+        "rev": "0e33952a4bcd16cd54ee3aba8111606c237d4526",
         "type": "github"
       },
       "original": {
-        "owner": "Platonic-Systems",
-        "repo": "mission-control",
+        "owner": "juspay",
+        "repo": "just-flake",
         "type": "github"
       }
     },
@@ -142,7 +142,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "flake-root": "flake-root",
-        "mission-control": "mission-control",
+        "just-flake": "just-flake",
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": "pre-commit-hooks",
         "systems": "systems",

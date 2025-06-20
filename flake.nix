@@ -75,6 +75,71 @@
               exec ${lib.getExe pkgs.quarto} "$@"
             '';
           };
+
+          # Create the new post script
+          create-post = let
+            createPostScript = pkgs.writeText "create_post.py" ''
+              #!/usr/bin/env python3
+              import os
+              import re
+              from datetime import date
+
+              def slugify(text: str) -> str:
+                  s = text.lower()
+                  s = re.sub(r"[^a-z0-9\s-]", "", s)
+                  s = re.sub(r"\s+", "-", s.strip())
+                  return s
+
+              def prompt(prompt_text: str, default: str = "") -> str:
+                  resp = input(f"{prompt_text} " + (f"[{default}] " if default else ""))
+                  return resp.strip() or default
+
+              def main():
+                  # 1. Gather info
+                  title = prompt("Post title:")
+                  author = prompt("Author name:", os.getenv("USER", ""))
+                  cats   = prompt("Categories (comma-separated):", "")
+                  draft_flag = prompt("Draft? (y/N):", "N").lower()
+                  draft = "true" if draft_flag in ("y", "yes") else "false"
+                  
+                  # 2. Date & slug
+                  today = date.today().isoformat()             # e.g. "2025-06-20"
+                  slug  = slugify(title)                       # e.g. "my-new-post"
+                  folder = f"{today}-{slug}"                   # e.g. "2025-06-20-my-new-post"
+                  
+                  # 3. Make directory
+                  post_dir = os.path.join("posts", folder)
+                  os.makedirs(post_dir, exist_ok=True)
+                  
+                  # 4. Write index.qmd
+                  filepath = os.path.join(post_dir, "index.qmd")
+                  fm_lines = [
+                      "---",
+                      f"title: \"{title}\"",
+                      f"author: \"{author}\"",
+                      f"date: {today}",
+                      "categories: [" + ", ".join(c.strip() for c in cats.split(",") if c.strip()) + "]",
+                      f"draft: {draft}",
+                      "format: html",
+                      "---",
+                      "",
+                      "<!-- start writing your post here -->"
+                  ]
+                  with open(filepath, "w") as f:
+                      f.write("\n".join(fm_lines))
+                  
+                  print(f"\n✔ Created new post at:\n  {filepath}\n")
+
+              if __name__ == "__main__":
+                  main()
+            '';
+          in pkgs.writeShellApplication {
+            name = "create-post";
+            runtimeInputs = [pkgs.python3];
+            text = ''
+              python3 ${createPostScript}
+            '';
+          };
         };
 
         devShells.default = pkgs.mkShell {
@@ -87,6 +152,7 @@
             # Use the wrapped quarto in the dev shell
             self'.packages.quarto
             self'.packages.pythonEnv
+            self'.packages.create-post
           ];
         };
 
@@ -98,6 +164,10 @@
               # Preview the quarto project
               preview:
                 ${lib.getExe self'.packages.quarto} preview
+
+              # Create a new blog post
+              new-post:
+                ${lib.getExe self'.packages.create-post}
             '';
           };
         };
